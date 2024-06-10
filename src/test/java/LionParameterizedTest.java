@@ -14,7 +14,6 @@ public class LionParameterizedTest {
     private String sex;
     private boolean hasMane;
     private Feline feline;
-    private String message = "Используйте допустимые значения пола животного - самей или самка";
 
     public LionParameterizedTest(String sex, boolean hasMane){
         this.sex = sex;
@@ -25,8 +24,7 @@ public class LionParameterizedTest {
     public static Object[][] data(){
         return new Object[][]{
                 {"Самец", true},
-                {"Самка", false},
-                {"Оно", false}
+                {"Самка", false}
         };
     }
 
@@ -36,15 +34,9 @@ public class LionParameterizedTest {
     }
 
     @Test
-    public void doesHaveManeTest(){
-        try {
+    public void doesHaveManeTest() throws Exception {
             Lion lion = new Lion(sex, feline);
             assertEquals(hasMane, lion.doesHaveMane());
-
-            } catch (Exception exception){
-                assertEquals(message, exception.getMessage());
-            }
-
     }
 
 }

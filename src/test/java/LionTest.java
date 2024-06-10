@@ -5,14 +5,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
+    private String message = "Используйте допустимые значения пола животного - самей или самка";
 
     @Mock
     Feline feline;
@@ -31,6 +30,15 @@ public class LionTest {
         Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
 
+    }
+
+    @Test
+    public void doesHaveManeExceptionTest(){
+        try {
+            Lion lion = new Lion("Тест", feline);
+        } catch (Exception exception){
+            assertEquals(message, exception.getMessage());
+        }
     }
 
 }
